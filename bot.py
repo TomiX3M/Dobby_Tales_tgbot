@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-
 import os
 import requests
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -17,11 +16,15 @@ from telegram.ext import (
 )
 
 # Set your API keys
-os.environ["TELEGRAM_BOT_TOKEN"] = "8486480960:AAG_ZzbBHM4153N2gh2x5utaxZFR-PUEgTE"
-os.environ["FIREWORKS_API_KEY"] = "fw_3ZbSYLcy2wvTVvVZ5JMZ2qfJ"
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+FIREWORKS_API_KEY = os.environ.get("FIREWORKS_API_KEY")
+
+if not TELEGRAM_BOT_TOKEN or not FIREWORKS_API_KEY:
+    raise ValueError("Missing required environment variables! Set TELEGRAM_BOT_TOKEN and FIREWORKS_API_KEY")
+
+
 
 # Fireworks AI configuration
-FIREWORKS_API_KEY = os.environ.get("FIREWORKS_API_KEY")
 FIREWORKS_URL = "https://api.fireworks.ai/inference/v1/chat/completions"
 
 GENRES = {
